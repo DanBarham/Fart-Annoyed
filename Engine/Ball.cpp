@@ -67,3 +67,8 @@ void Ball::ReboundY()
 {
 	vel.y *= -1;
 }
+
+Vec2 Ball::GetVel() const
+{
+	return vel;
+}
