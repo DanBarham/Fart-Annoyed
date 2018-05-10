@@ -2,10 +2,10 @@
 
 RectF::RectF(float _left, float _right, float _top, float _bottom)
 	:
-	left(_left),
-	right(_right),
-	top(_top),
-	bottom(_bottom)
+	left( _left ),
+	right( _right ),
+	top( _top ),
+	bottom( _bottom )
 
 {}
 
