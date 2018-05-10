@@ -11,9 +11,9 @@ public:
 	void Update( float dt );
 	bool WallCollision( const RectF& walls );
 	RectF GetRect() const;
-private:
 	void ReboundX();
 	void ReboundY();
+private:
 	static constexpr float radius = 7.0f;
 	Vec2 pos;
 	Vec2 vel;
