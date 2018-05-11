@@ -10,7 +10,17 @@ Paddle::Paddle(const Vec2 & _pos, float _halfWidth, float _halfHeight)
 
 void Paddle::Draw( Graphics & gfx ) const
 {
-	gfx.DrawRect(GetRect(), color);
+	const float wingWidth = .15f;  //Percentage of the width that each wing takes up
+	RectF leftWing = GetRect();
+	leftWing.right = leftWing.left + (wingWidth * 2.0f * halfWidth); 
+	RectF rightWing = GetRect();
+	rightWing.left = rightWing.right - (wingWidth * 2.0f * halfWidth);
+	RectF center = GetRect();
+	center.left = leftWing.right;
+	center.right = rightWing.left;
+	gfx.DrawRect(center, color);
+	gfx.DrawRect(leftWing, wingColor);
+	gfx.DrawRect(rightWing, wingColor);
 }
 
 bool Paddle::BallCollision( Ball & ball ) const

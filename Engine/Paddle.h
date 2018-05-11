@@ -17,6 +17,7 @@ public:
 	void Update( const Keyboard& kbd,float dt );
 	RectF GetRect() const;
 private:
+	Color wingColor = Colors::Red;
 	Color color = Colors::White;
 	float speed = 300.0f;
 	float halfWidth;

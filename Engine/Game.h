@@ -49,7 +49,7 @@ private:
 	/*  User Variables              */
 	Ball ball;
 	FrameTimer ft;
-	Brick brick;
+	Brick testBrick;
 	RectF walls;
 	Paddle paddle;
 	Sound soundPad;
