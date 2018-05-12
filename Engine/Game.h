@@ -47,11 +47,11 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	static constexpr int nBricksAcross = 12;
+	static constexpr int nBricksAcross = 18;
 	static constexpr int nBricksDown = 4;
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
-	static constexpr float brickWidth = Graphics::ScreenWidth / nBricksAcross;
-	static constexpr float brickHeight = 15.0f;
+	static constexpr float brickWidth = 40.0f;
+	static constexpr float brickHeight = 20.0f;
 	Ball ball;
 	FrameTimer ft;
 	RectF walls;
