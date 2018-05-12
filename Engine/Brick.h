@@ -8,6 +8,7 @@
 class Brick
 {
 public:
+	Brick() = default;
 	Brick( const RectF & _rect,Color _color );
 	void Draw( Graphics & gfx ) const;
 	bool BallCollision( Ball& ball );
