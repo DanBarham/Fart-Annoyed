@@ -4,7 +4,8 @@
 Brick::Brick(const RectF & _rect, Color _color)
 	:
 	rect(_rect),
-	color(_color)
+	color(_color),
+	destroyed( false )
 {
 }
 
