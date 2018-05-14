@@ -25,22 +25,25 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	ball ( Vec2( 425.0f,450.0f ),Vec2( 300.0f,300.0f ) ),
+	ball ( Vec2( 300.0f + 16.0f,300.0f ),Vec2( -300.0f,-300.0f ) ),
 	walls( 0.0f, float( gfx.ScreenWidth ),0.0f, float( gfx.ScreenHeight ) ),
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
-	paddle( Vec2( float( gfx.ScreenWidth / 2 ),500.0f ),60.0f,6.0f )
+	paddle( Vec2( float( gfx.ScreenWidth / 2 ),500.0f ),50.0f,15.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
-	const Vec2 topLeft( Graphics::ScreenWidth / 2 - brickWidth*nBricksAcross/2.0f,100.0f );
+	const Vec2 topLeft( 40.0f,40.0f );
 
 	for ( int y = 0; y < nBricksDown; ++y )
 	{
 		for ( int x = 0; x < nBricksAcross; ++x )
 		{
-			bricks[(y * nBricksAcross) + x] = Brick(
-				RectF ( topLeft + Vec2( float(x) * brickWidth,float(y) * brickHeight ),brickWidth,brickHeight ),
-				colors[y] );
+			if(x == 3 && y == 3)
+			{
+				bricks[(y * nBricksAcross) + x] = Brick(
+					RectF(topLeft + Vec2(float(x) * brickWidth, float(y) * brickHeight), brickWidth, brickHeight),
+					colors[y]);
+			}
 		}
 	}
 }
