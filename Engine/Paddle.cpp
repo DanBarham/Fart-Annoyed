@@ -25,9 +25,25 @@ void Paddle::Draw( Graphics & gfx ) const
 
 bool Paddle::BallCollision( Ball & ball ) const
 {
-	if ( ball.GetVel().y > 0.0f && GetRect().IsOverlappingWith(ball.GetRect()))
+	const RectF rect = GetRect();
+	if ( rect.IsOverlappingWith( ball.GetRect() ) )
 	{
-		ball.ReboundY();
+		const Vec2 ballPos = ball.GetPos();
+		const Vec2 ballVel = ball.GetVel();
+
+		if( std::signbit(ballVel.x) == std::signbit( (ballPos - pos).x ) )
+		{
+			ball.ReboundY();
+		}
+		else if( ballPos.x >= rect.left  && ballPos.x <= rect.right )
+		{
+			ball.ReboundY();
+		}
+		else
+		{
+			ball.ReboundX();
+		}
+
 		return true;
 	}
 
