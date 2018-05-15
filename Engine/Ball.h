@@ -13,6 +13,7 @@ public:
 	RectF GetRect() const;
 	void ReboundX();
 	void ReboundY();
+	void Rebound( const Vec2 newDir );
 	Vec2 GetVel() const;
 	Vec2 GetPos() const;
 private:

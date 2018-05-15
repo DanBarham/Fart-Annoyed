@@ -21,15 +21,26 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+/*
+TODO::
+Make paddle rebound angle vary
+Game over when hit bottom of screen
+Adjust wall dimensions / paddle / size of bricks
+Draw border to show walls
+Implement lives system
+Title screen / game over screen
+Paddle sprite (not shown in solution video) / brick shading
+*/
+
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	ball ( Vec2( 300.0f,300.0f ),Vec2( -300.0f,-300.0f ) ),
+	ball ( Vec2( 300.0f,300.0f ),Vec2( 350.0f,350.0f ) ),
 	walls( 0.0f, float( gfx.ScreenWidth ),0.0f, float( gfx.ScreenHeight ) ),
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
-	paddle( Vec2( float( gfx.ScreenWidth / 2 ),500.0f ),60.0f,20.0f )
+	paddle( Vec2( float( gfx.ScreenWidth / 2 ),500.0f ),50.0f,8.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
 	const Vec2 topLeft( Graphics::ScreenWidth / 2 - brickWidth*nBricksAcross/2.0f,100.0f );

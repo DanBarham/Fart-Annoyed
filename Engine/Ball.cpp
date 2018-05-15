@@ -68,6 +68,12 @@ void Ball::ReboundY()
 	vel.y *= -1;
 }
 
+void Ball::Rebound(const Vec2 newDir)
+{
+	const float magnitude = vel.GetLength();
+	vel = (pos - newDir).GetNormalized() * magnitude;
+}
+
 Vec2 Ball::GetVel() const
 {
 	return vel;
