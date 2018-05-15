@@ -52,6 +52,7 @@ private:
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
 	static constexpr float brickWidth = 40.0f;
 	static constexpr float brickHeight = 22.0f;
+	bool gameOver = false;
 	Ball ball;
 	FrameTimer ft;
 	RectF walls;

@@ -5,7 +5,8 @@ Ball::Ball(const Vec2 & _pos, const Vec2 & _vel)
 	:
 	pos( _pos ),
 	vel( _vel )
-{}
+{
+}
 
 void Ball::Draw(Graphics & gfx) const
 {
@@ -43,14 +44,18 @@ bool Ball::WallCollision(const RectF & walls)
 		pos.y += walls.top - rect.top;
 		collided = true;
 	}
-	else if (rect.bottom > walls.bottom)
-	{
-		ReboundY();
-		pos.y -= rect.bottom - walls.bottom;
-		collided = true;
-	}
 
 	return collided;
+}
+
+bool Ball::CheckGameOver(const RectF & walls)
+{
+	if (GetRect().bottom > walls.bottom)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 RectF Ball::GetRect() const

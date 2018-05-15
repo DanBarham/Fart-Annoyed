@@ -10,6 +10,7 @@ public:
 	void Draw( Graphics& gfx ) const;
 	void Update( float dt );
 	bool WallCollision( const RectF& walls );
+	bool CheckGameOver( const RectF& walls );
 	RectF GetRect() const;
 	void ReboundX();
 	void ReboundY();

@@ -23,8 +23,6 @@
 
 /*
 TODO::
-Make paddle rebound angle vary
-Game over when hit bottom of screen
 Adjust wall dimensions / paddle / size of bricks
 Draw border to show walls
 Implement lives system
@@ -74,51 +72,56 @@ void Game::Go()
 
 void Game::UpdateModel( float dt )
 {
-	paddle.Update( wnd.kbd,dt );
-	paddle.WallCollision( walls );
-
-	ball.Update(dt);
-
-	if( paddle.BallCollision( ball ) )
+	if (!gameOver)
 	{
-		soundPad.Play();
-	}
+		paddle.Update( wnd.kbd, dt );
+		paddle.WallCollision( walls );
 
-	bool collisionHappened = false;
-	float curColDistSq;
-	int curColIndex;
-	for(int i = 0; i < nBricks; ++i)
-	{
-		if( bricks[i].CheckBallCollision( ball ) )
+		ball.Update( dt );
+
+		if( paddle.BallCollision( ball ) )
 		{
-			const float newColDistSq = (ball.GetPos() - bricks[i].GetCenter()).GetLengthSq();
-			if(collisionHappened)
+			soundPad.Play();
+		}
+
+		bool collisionHappened = false;
+		float curColDistSq;
+		int curColIndex;
+		for( int i = 0;i < nBricks;++i )
+		{
+			if ( bricks[i].CheckBallCollision( ball ) )
 			{
-				if( newColDistSq < curColDistSq )
+				const float newColDistSq = ( ball.GetPos() - bricks[i].GetCenter() ).GetLengthSq();
+				if (collisionHappened)
+				{
+					if( newColDistSq < curColDistSq )
+					{
+						curColDistSq = newColDistSq;
+						curColIndex = i;
+					}
+				}
+				else
 				{
 					curColDistSq = newColDistSq;
 					curColIndex = i;
+					collisionHappened = true;
 				}
 			}
-			else
-			{
-				curColDistSq = newColDistSq;
-				curColIndex = i;
-				collisionHappened = true;
-			}
 		}
-	}
-	if( collisionHappened )
-	{
-		paddle.ResetCooldown();
-		bricks[curColIndex].ExecuteBallCollision( ball );
-		soundBrick.Play();
-	}
+		if( collisionHappened )
+		{
+			paddle.ResetCooldown();
+			bricks[curColIndex].ExecuteBallCollision(ball);
+			soundBrick.Play();
+		}
 
-	if( ball.WallCollision( walls ) )
-	{
-		paddle.ResetCooldown();
-		soundPad.Play();
+		if( ball.WallCollision( walls ) )
+		{
+			paddle.ResetCooldown();
+			soundPad.Play();
+		}
+
+		gameOver = ball.CheckGameOver( walls );
 	}
 }
 
@@ -130,4 +133,8 @@ void Game::ComposeFrame()
 		b.Draw(gfx);
 	}
 	paddle.Draw( gfx );
+	if(gameOver)
+	{
+		gfx.DrawGameOver( 358,268 );
+	}
 }
