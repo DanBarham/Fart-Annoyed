@@ -30,22 +30,6 @@ bool Paddle::BallCollision( Ball & ball )
 	{
 		if (rect.IsOverlappingWith(ball.GetRect()))
 		{
-			/*const Vec2 ballPos = ball.GetPos();
-			const Vec2 ballVel = ball.GetVel();
-
-			if (std::signbit(ballVel.x) == std::signbit((ballPos - pos).x))
-			{
-				ball.ReboundY();
-			}
-			else if (ballPos.x >= rect.left  && ballPos.x <= rect.right)
-			{
-				ball.ReboundY();
-			}
-			else
-			{
-				ball.ReboundX();
-			}*/
-
 			ball.Rebound( pos );
 
 			isCooldown = true;

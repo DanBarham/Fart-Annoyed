@@ -73,10 +73,22 @@ void Ball::ReboundY()
 	vel.y *= -1;
 }
 
-void Ball::Rebound(const Vec2 newDir)
+void Ball::Rebound( const Vec2 newDir )
 {
+	const Vec2 distance = pos - newDir;
 	const float magnitude = vel.GetLength();
-	vel = (pos - newDir).GetNormalized() * magnitude;
+	if ( distance.GetLength() < 25.0f && distance.x <= 0.0f )
+	{
+		vel = Vec2( -0.90f,-1.0f ).GetNormalized() * magnitude;
+		return;
+	}
+	else if( distance.GetLength() < 25.0f && distance.x > 0.0f )
+	{
+		vel = Vec2( 0.90f,-1.0f ).GetNormalized() * magnitude;
+		return;
+	}
+
+	vel = distance.GetNormalized() * magnitude;
 }
 
 Vec2 Ball::GetVel() const
