@@ -39,6 +39,7 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel( float dt );
+	void DrawWall();
 	/********************************/
 	/*  User Functions              */
 	/********************************/
@@ -47,10 +48,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	static constexpr int nBricksAcross = 18;
+	static constexpr int nBricksAcross = 14;
 	static constexpr int nBricksDown = 4;
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
-	static constexpr float brickWidth = 40.0f;
+	static constexpr float brickWidth = 39.0f;
 	static constexpr float brickHeight = 22.0f;
 	bool gameOver = false;
 	bool gameStarted = false;

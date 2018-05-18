@@ -36,7 +36,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	ball ( Vec2( 300.0f,300.0f ),Vec2( 350.0f,350.0f ) ),
-	walls( 0.0f, float( gfx.ScreenWidth ),0.0f, float( gfx.ScreenHeight ) ),
+	walls( 125.0f,float( gfx.ScreenWidth ) - 125.0f,25.0f,float( gfx.ScreenHeight ) ),
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
 	paddle( Vec2( float( gfx.ScreenWidth / 2 ),500.0f ),50.0f,8.0f )
@@ -137,10 +137,31 @@ void Game::UpdateModel( float dt )
 	}
 }
 
+void Game::DrawWall()
+{
+	const int padding = 10;
+	const Color wallColor = Colors::Gray;
+	for(int y = int(walls.top) - padding; y < int(walls.bottom); ++y)
+	{
+		for(int x = int(walls.left) - padding; x < int(walls.right) + padding; ++x)
+		{
+			if( y < int(walls.top) )
+			{
+				gfx.PutPixel( x,y,wallColor );
+			}
+			else if( x < int(walls.left) || x > int(walls.right) )
+			{
+				gfx.PutPixel( x,y,wallColor );
+			}
+		}
+	}
+}
+
 void Game::ComposeFrame()
 {
 	if ( gameStarted )
 	{
+		DrawWall();
 		ball.Draw( gfx );
 		for ( const Brick& b : bricks )
 		{
